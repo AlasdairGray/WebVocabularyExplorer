@@ -1,0 +1,128 @@
+@CHARSET "ISO-8859-1";
+
+#container
+{
+width: 90%;
+margin: 10px auto;
+background-color: #fff;
+color: #333;
+border: 1px solid gray;
+line-height: 130%;
+font-family: perpetua, garamond, serif;
+font-size: 110%;
+min-width: 40em;
+}
+
+#top
+{
+padding: .5em;
+background-color: #808080;
+border-bottom: 1px solid gray;
+}
+
+#top h1
+{
+font-family: "felix titling", garamond, serif;
+padding: .25em .5em .25em .5em;
+margin: 0;
+letter-spacing: .25em;
+color: #ffffff;
+}
+
+#content
+{
+margin-left: 0px;
+padding: 1em;
+min-width: 20em;
+min-height: 500px;
+}
+
+#footer
+{
+clear: both;
+margin: 0;
+padding: .5em;
+color: #ffffff;
+background-color: #808080;
+border-top: 1px solid gray;
+text-align: right;
+}
+
+#content p{
+text-align: justify;
+}
+
+#content h1 { 
+margin: 2em 0 1em 0;
+font-family: "felix titling", garamond, serif;
+}
+
+#content h2 { 
+margin: 1em 0 .5em 0;
+font-family: "felix titling", garamond, serif;
+}
+
+#content h3 { 
+margin: 1em 0 .5em 0;
+font-family: "felix titling", garamond, serif;
+}
+
+.gwt-DisclosurePanel.header {
+	cursor: pointer;
+  	cursor: hand;
+}
+
+.gwt-DisclosurePanel.content {
+margin: 10px;
+}
+
+.gwt-HTML {
+	margin-left: 10px;
+	margin-right: 20px;
+}
+
+.gwt-DialogBox {
+  border: 2px outset;
+  background-color: white;
+  padding-bottom: 1em;
+}
+
+.gwt-DialogBox .Caption {
+  background-color: #808080;
+  font-weight: bold;
+  cursor: default;
+  font-family: "felix titling", garamond, serif;
+  margin: 0;
+  padding: .5em;
+  letter-spacing: .25em;
+  color: #ffffff;
+}
+
+.error-Popup {
+	background-color: white;
+  	border: 1px solid #87B3FF;
+  	padding: 4px;	
+}
+
+.gwt-DialogBox #h2 {
+	margin-top: 1em;
+}
+
+.gwt-DialogBox #ul {
+	padding: 1em;
+}
+
+.gwt-DialogBox #li #p{
+	width: 75%;
+	padding: 1em;
+}
+
+.content {
+	margin: 10px;
+}
+	
+#conceptSearch {
+width: 90%;
+font-family: arial, sans-serif;
+margin: 10px;
+}

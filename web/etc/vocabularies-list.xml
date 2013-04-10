@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Configuration file used to supply URLs of vocabularies
+	for use in the service.
+	
+	Entries are of the form
+	<vocabulary>
+		<url></url>
+		<rdf-format></rdf-format>
+	</vocabulary>
+	
+	Valid entries for rdf-format include: TURTLE, and XML
+	
+-->
+
+<vocabularies-list>
+	<vocabulary> 
+<!--		<file>/Users/agray/Workspace/EclipseWorkspace/WebVocabularyExplorer/web/etc/vocabs/AAkeys.rdf</file>-->
+		<url>http://www.ivoa.net/rdf/Vocabularies/AAkeys</url> 
+		<rdf-format>XML</rdf-format>
+	</vocabulary>
+	<vocabulary>
+		<url>http://www.ivoa.net/rdf/Vocabularies/AVM</url> 
+<!--		<file>/Users/agray/Workspace/EclipseWorkspace/WebVocabularyExplorer/web/etc/vocabs/AVM.rdf</file>-->
+		<rdf-format>XML</rdf-format>
+	</vocabulary>
+	<vocabulary>
+		 <url>http://www.ivoa.net/rdf/Vocabularies/IAUT93</url> 
+<!--		<file>/Users/agray/Workspace/EclipseWorkspace/WebVocabularyExplorer/web/etc/vocabs/IAUT93.rdf</file>-->
+		<rdf-format>XML</rdf-format>
+	</vocabulary>
+	<vocabulary>
+		 <url>http://www.ivoa.net/rdf/Vocabularies/IVOAT</url> 
+<!--		<file>/Users/agray/Workspace/EclipseWorkspace/WebVocabularyExplorer/web/etc/vocabs/IVOAT.rdf</file>-->
+		<rdf-format>XML</rdf-format>
+	</vocabulary>
+	<vocabulary>
+		 <url>http://www.ivoa.net/rdf/Vocabularies/UCD</url> 
+<!--		<file>/Users/agray/Workspace/EclipseWorkspace/WebVocabularyExplorer/web/etc/vocabs/UCD.rdf</file>-->
+		<rdf-format>XML</rdf-format>
+	</vocabulary>	
+</vocabularies-list>

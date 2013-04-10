@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="WebVocabularyExplorer" default="package" basedir=".">
+	<description>
+		WebVocabularyExplorer build file.  This is used to package up your project as a war,
+	    for deployment on a web server.
+	</description>
+
+	<property name="build.dir" location="${basedir}/bin"/>
+	<property name="client.dir" location="${basedir}/www/uk.ac.gla.dcs.explicator.vocabularies.WebVocabularyExplorer"/>
+	<property name="lib.dir" location="${basedir}/lib"/>
+	<property name="web.dir" location="${basedir}/web"/>	
+	<property name="config.dir" location="${web.dir}/config"/>
+	<!-- property name="SKOSRepository" location="../SKOSRepository"/ -->
+	<property name="Terrier" location="../Terrier"/>
+
+	<property name="java_version" value="1.5" />
+
+	<!-- OS specific commands -->
+	<!-- Client compile -->
+	<!-- MAC OSX -->
+	<property name="GWT.dir" location="/Users/agray/bin/gwt-mac-1.5.3"/>
+	<property name="client.compile" value="${basedir}/WebVocabularyExplorer-compile"/>
+	<!-- Windows -->
+	<!--
+	<property name="GWT.dir" location="C:\Program Files\gwt-windows-1.4.62"/>
+	<property name="client.compile" value="${basedir}/WebVocabularyExplorer-compile.cmd"/>
+	-->
+	
+	<!-- set classpath -->
+	<path id="project.class.path">
+		<pathelement path="${java.class.path}/"/>
+	    <pathelement path="${GWT.dir}/gwt-user.jar"/>  	
+		<pathelement path="${lib.dir}/antlr.jar"/>
+		<pathelement path="${lib.dir}/terrier-2.1.jar"/>
+		<pathelement path="${lib.dir}/trove-2.0.2.jar"/>
+	  	<pathelement path="${lib.dir}/log4j-1.2.15.jar"/>
+	  	<pathelement path="${lib.dir}/aduna-commons-net-2.1.jar"/>
+	  	<pathelement path="${lib.dir}/slf4j-api-1.4.3.jar"/>
+	  	<pathelement path="${lib.dir}/slf4j-log4j12-1.4.3.jar"/>
+		<pathelement path="${lib.dir}/aduna-commons-xml-2.1.jar"/>
+		<pathelement path="${lib.dir}/aduna-commons-text-2.1.jar"/>
+	  	<pathelement path="${lib.dir}/sesame-model-2.1.3.jar"/>
+		<pathelement path="${lib.dir}/sesame-rio-api-2.1.3.jar"/>
+		<pathelement path="${lib.dir}/sesame-rio-n3-2.1.3.jar"/>
+		<pathelement path="${lib.dir}/sesame-rio-ntriples-2.1.3.jar"/>
+		<pathelement path="${lib.dir}/sesame-rio-rdfxml-2.1.3.jar"/>
+		<pathelement path="${lib.dir}/sesame-rio-turtle-2.1.3.jar"/>
+		<!-- WARNING this is dependent on my machine -->
+		<pathelement path="/Applications/eclipse/plugins/org.junit4_4.3.1"/>
+	</path>
+
+	<target name="init">
+		<echo>Copying gwt files to web directory</echo>
+		<copy file="${GWT.dir}/gwt-servlet.jar" todir="${web.dir}/WEB-INF/lib"/>
+		<copy file="${GWT.dir}/gwt-user.jar" todir="${web.dir}/WEB-INF/lib"/>
+	</target>
+<!--	
+	<target name="skos-makejar">
+		<echo>Making SKOSRepository</echo>
+	  	<ant dir="${SKOSRepository}" target="makejars"/>
+	</target>
+-->	
+	<target name="terrier-compile" 
+		description="Compile the terrier code and copy the jar file">
+		<echo>Making Terrier</echo>
+		<!-- run make command -->
+		<exec dir="${Terrier}" executable="make">
+			<arg line="clean compile"/>
+		</exec>
+		<copy file="${Terrier}/lib/terrier-2.1.jar" todir="${lib.dir}"/>
+		<copy file="${Terrier}/lib/terrier-2.1.jar" todir="${web.dir}/WEB-INF/lib"/>
+	</target>
+	
+<!--	<target name="server-compile" depends="init,skos-makejar" description="Compiles server code from src to bin"> -->
+		<target name="server-compile" depends="init" description="Compiles server code from src to bin">	
+		<echo>Making GWT Server</echo>
+	    <mkdir dir="bin"/>
+	    <javac srcdir="src" destdir="bin" includes="**" debug="on" debuglevel="lines,vars,source"><!-- source="${java_version}"-->
+	      <classpath refid="project.class.path"/>
+	    </javac>
+	</target>
+
+	<target name="client-compile" depends="init" description="Compiles the client application">
+		<exec executable="${client.compile}">
+		</exec>
+	</target>
+
+	<target name="package" depends="client-compile,server-compile" description="Package up the project as a war">
+	  	<echo>Copying server jar files to web library</echo>
+		<war destfile="${basedir}/WebVocabularyExplorer.war"
+			 webxml="${web.dir}/WEB-INF/web.xml">
+			<fileset dir="${client.dir}"/>
+			<fileset dir="${web.dir}" includes="etc/*.*" />
+			<fileset dir="${web.dir}" includes="var/**" excludes="**/**/data.*" />
+			<lib dir="${web.dir}/WEB-INF/lib" excludes="gwt-user.jar" />
+			<classes dir="${build.dir}"/>
+		</war>
+	</target>
+
+	<!-- ================================= 
+          target: eclipse-prepare              
+          Removes existing log files and index files
+         ================================= -->
+    <target name="eclipse-prepare" description="Removes existing log files and index files">
+    	<property name="tomcat.dir" location="${basedir}/tomcat/webapps/ROOT/"/>
+        <echo>Deleting indecies</echo>    	
+    	<delete failonerror="false">
+    		<fileset dir="${tomcat.dir}/var/index/" includes="**" />
+    	</delete>
+    	<echo>Deleting logs</echo>
+    	<delete failonerror="false">
+        	<fileset dir="${basedir}/logs/" includes="*.log" />
+    	</delete>
+    	<echo>Copying dependent files</echo>
+    	<copy todir="${tomcat.dir}">
+			<fileset dir="${web.dir}" excludes="WEB-INF/**"/>
+    	</copy>
+    </target>
+
+	
+	<target name="clean" description="Remove constructed files">
+		<!-- Removing gwt files from web directory -->
+		<delete file="${web.dir}/WEB-INF/lib/gwt-servlet.jar" />
+		<delete file="${web.dir}/WEB-INF/lib/gwt-user.jar" />
+		
+		<!-- delete constructed jar and war files -->
+<!--		<delete file="${web.dir}/WEB-INF/lib/SKOSRepository.jar"/> -->
+		<delete file="WebVocabularyExplorer.war"/>		
+	    <!-- Delete the bin directory tree -->
+	    <delete dir="bin" />
+	</target>
+	
+<!--	<target name="skos-cleanAll">
+		<echo>Clean SKOSRepository</echo>
+		<ant dir="${SKOSRepository}" target="cleanAll"/>
+	</target>
+-->	
+<!--	<target name="cleanAll" depends="clean,skos-cleanAll" description="Removes files constructed in other projects"> -->
+	<target name="cleanAll" depends="clean" description="Removes files constructed in other projects">
+		<echo>Clean local files</echo>
+		<delete dir="www" />
+	</target>
+
+	<target name="all" depends="cleanAll,package" 
+		description="Completely cleans and then rebuilds and packages up the project"/>
+
+</project>

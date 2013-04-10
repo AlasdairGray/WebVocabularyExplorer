@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <servlet>
+    <servlet-name>VocabularyExplorerService</servlet-name>
+    <servlet-class>uk.ac.gla.dcs.explicator.vocabularies.server.VocabularyExplorerServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VocabularyExplorerService</servlet-name>
+    <url-pattern>/vocabExplorer</url-pattern>
+  </servlet-mapping>
+</web-app>

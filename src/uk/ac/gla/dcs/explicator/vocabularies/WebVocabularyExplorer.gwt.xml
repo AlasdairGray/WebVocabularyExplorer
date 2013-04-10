@@ -1,0 +1,13 @@
+<module>
+
+	<!-- Inherit the core Web Toolkit stuff.                  -->
+	<inherits name='com.google.gwt.user.User'/>
+	<inherits name='com.google.gwt.http.HTTP'/>
+
+	<!-- Specify the app entry point class.                   -->
+	<entry-point class='uk.ac.gla.dcs.explicator.vocabularies.client.WebVocabularyExplorer'/>
+  
+  	<!--  Path to the server -->
+  	<servlet path="/vocabExplorer" class="uk.ac.gla.dcs.explicator.vocabularies.server.VocabularyExplorerServiceImpl"/>
+  	
+</module>

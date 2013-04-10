@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Configuration file used to supply URLs of mappings for 
+	use in the service.
+	
+	Entries are of the form
+	<mapping>
+		[<url></url> | <file></file>]
+		<rdf-format></rdf-format>
+		<includes-inverses>[true|false]</includes-inverses>
+	</mapping>
+	
+	Valid entries for rdf-format include: TURTLE, and XML
+	
+-->
+
+<mappings-list>
+	<mapping>
+		<url>http://www.ivoa.net/rdf/Vocabularies/AAkeys2AVM</url>
+<!--		<file>/Users/agray/Workspace/EclipseWorkspace/WebVocabularyExplorer/web/etc/vocabs/AAkeys2AVM.rdf</file>-->
+		<rdf-format>XML</rdf-format>
+		<includes-inverses>false</includes-inverses>
+	</mapping>	
+</mappings-list>
+
+
